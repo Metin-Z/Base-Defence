@@ -19,12 +19,13 @@ public class SniperComponent : MonoBehaviour
             ShotPos = new Vector3(collision.transform.position.x, collision.transform.position.y+1.55f, collision.transform.position.z);
             CanvasManager.Instance.miniUse--;
             CanvasManager.Instance.MainCamera.GetComponent<Camera>().DOFieldOfView(20, 0.3f).OnComplete(()=>
-                CanvasManager.Instance.MainCamera.GetComponent<Camera>().DOFieldOfView(10, 0.2f));        
-            collision.transform.gameObject.GetComponent<EnemyComponent>().enabled = false;
-            collision.transform.gameObject.GetComponent<CapsuleCollider>().enabled = false;
-            collision.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.DOFade(0f, 3);
+                CanvasManager.Instance.MainCamera.GetComponent<Camera>().DOFieldOfView(10, 0.2f));
+            GameObject Obj = collision.transform.gameObject;
+            Obj.gameObject.GetComponent<EnemyComponent>().enabled = false;
+            Obj.gameObject.GetComponent<CapsuleCollider>().enabled = false;
+            Obj.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.DOFade(0f, 3);
             Destroy(collision.transform.gameObject, 4.5f);
-            collision.transform.gameObject.GetComponent<Animator>().SetBool("Death", true);
+            Obj.gameObject.GetComponent<Animator>().SetBool("Death", true);
             GameObject blood = Instantiate(EnemySpawner.Instance.blood,ShotPos,Quaternion.identity);
             GameObject pistol = collision.transform.gameObject.GetComponent<EnemyComponent>().Pistol;
             pistol.transform.parent = null;

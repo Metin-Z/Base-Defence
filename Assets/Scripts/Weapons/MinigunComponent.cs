@@ -21,11 +21,12 @@ public class MinigunComponent : MonoBehaviour
 
             CanvasManager.Instance.MainCamera.GetComponent<Camera>().DOFieldOfView(80, 0.3f).OnComplete(() =>
                 CanvasManager.Instance.MainCamera.GetComponent<Camera>().DOFieldOfView(65, 0.2f));
-            collision.transform.gameObject.GetComponent<EnemyComponent>().enabled = false;
-            collision.transform.gameObject.GetComponent<CapsuleCollider>().enabled = false;
-            collision.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.DOFade(0f, 3);
+            GameObject Obj = collision.transform.gameObject;
+            Obj.GetComponent<EnemyComponent>().enabled = false;
+            Obj.GetComponent<CapsuleCollider>().enabled = false;
+            Obj.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.DOFade(0f, 3);
             Destroy(collision.transform.gameObject, 4.5f);
-            collision.transform.gameObject.GetComponent<Animator>().SetBool("Death", true);
+            Obj.transform.gameObject.GetComponent<Animator>().SetBool("Death", true);
             GameObject blood = Instantiate(EnemySpawner.Instance.blood, ShotPos, Quaternion.identity);
             GameObject pistol = collision.transform.gameObject.GetComponent<EnemyComponent>().Pistol;
             pistol.transform.parent = null;
