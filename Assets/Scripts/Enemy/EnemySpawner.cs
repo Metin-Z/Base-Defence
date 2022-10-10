@@ -5,12 +5,18 @@ using System.Linq;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static EnemySpawner Instance;
     public List<GameObject> Enemies;
+    public GameObject blood;
 
     int spawnTime;
     int enemySkin;
     float spawnX;
     float spawnZ;
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Start()
     {
         StartCoroutine(SpawnEnemy());
