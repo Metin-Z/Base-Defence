@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class SniperComponent : MonoBehaviour
+public class MinigunComponent : MonoBehaviour
 {
     RaycastHit collision;
     void Update()
@@ -15,9 +15,8 @@ public class SniperComponent : MonoBehaviour
         //int layer2 = 8;
         if (Physics.Raycast(Point, out collision, Mathf.Infinity, 1 << layer))
         {
-            CanvasManager.Instance.miniUse--;
-            CanvasManager.Instance.MainCamera.GetComponent<Camera>().DOFieldOfView(30, 0.1f);
-            CanvasManager.Instance.MainCamera.GetComponent<Camera>().DOFieldOfView(10, 0.1f);
+            CanvasManager.Instance.MainCamera.GetComponent<Camera>().DOFieldOfView(115, 0.1f);
+            CanvasManager.Instance.MainCamera.GetComponent<Camera>().DOFieldOfView(65, 0.1f);
             collision.transform.gameObject.GetComponent<EnemyComponent>().enabled = false;
             collision.transform.gameObject.GetComponent<CapsuleCollider>().enabled = false;
             collision.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.DOFade(0.1f, 3);

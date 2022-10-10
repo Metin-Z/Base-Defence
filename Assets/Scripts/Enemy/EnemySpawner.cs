@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
     }
     public IEnumerator SpawnEnemy()
     {
-        spawnTime = Random.Range(3, 7);
+        spawnTime = Random.Range(2, 5);
         yield return new WaitForSeconds(spawnTime);
         enemySkin = Random.Range(0, 3);
         spawnX = Random.Range(6.444f, 12.14f);
