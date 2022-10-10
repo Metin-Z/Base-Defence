@@ -7,6 +7,7 @@ public class EnemyComponent : MonoBehaviour
     public float randomSpeed;
     public float shootRangeZ;
     public float shootRangeX;
+    public GameObject Pistol;
     Vector3 target;
     public Animator anim;
     bool look;
