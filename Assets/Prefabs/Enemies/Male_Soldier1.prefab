@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 5570529727452042151}
   - component: {fileID: 6367325594352885778}
   - component: {fileID: 4089753995975943706}
+  - component: {fileID: 1560631221554242981}
   m_Layer: 7
   m_Name: Male_Soldier1
   m_TagString: Enemy
@@ -282,6 +283,28 @@ MonoBehaviour:
   shootRangeX: 0
   Pistol: {fileID: 5022982101625151457}
   anim: {fileID: 5570529727452042151}
+--- !u!195 &1560631221554242981
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558005076080594126}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1573158110044211694
 GameObject:
   m_ObjectHideFlags: 0

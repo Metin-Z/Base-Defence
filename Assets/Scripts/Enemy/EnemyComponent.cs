@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyComponent : MonoBehaviour
 {
@@ -8,31 +9,49 @@ public class EnemyComponent : MonoBehaviour
     public float shootRangeZ;
     public float shootRangeX;
     public GameObject Pistol;
-    Vector3 target;
+    public Vector3 target;
     public Animator anim;
     bool look;
+    bool targetOn = true;
+    bool lookBase = true;
     void Start()
     {
         look = true;
-        randomSpeed = Random.Range(2, 6);
-        shootRangeZ = Random.Range(3.5f, 7);
-        shootRangeX = Random.Range(3.5f, 7);
-        target = new Vector3(BaseComponent.Instance.transform.position.x + shootRangeX, 0, BaseComponent.Instance.transform.position.z + shootRangeZ);
+        randomSpeed = Random.Range(3.5f, 5);
+        shootRangeZ = Random.Range(0.3f, 6f);
+        shootRangeX = Random.Range(-4, 10);
+        target = new Vector3(shootRangeX,0,shootRangeZ);
+        
+        if (look == true)
+        {
+            transform.LookAt(target, new Vector3(transform.rotation.x, transform.rotation.y, 0));
+        }
     }
 
     void Update()
     {
-        if (look== true)
+        NavMeshAgent nMesh = GetComponent<NavMeshAgent>();
+        nMesh.speed = randomSpeed;
+        if (targetOn == true)
         {
-            transform.LookAt(BaseComponent.Instance.transform, new Vector3(transform.rotation.x, transform.rotation.y, 0));
-        }
-        
-        transform.position = Vector3.MoveTowards(transform.position, target, randomSpeed * Time.deltaTime);
-       
-        if (transform.position == target)
+            nMesh.destination = target;
+        }    
+        if (Mathf.Abs( target.x-transform.position.x) < 0.55f && Mathf.Abs(target.z - transform.position.z) < 0.55f)
         {
-            anim.SetBool("Stop", true);
+            targetOn = false;
+            nMesh.enabled = false;
+            anim.SetBool("Stop", true);           
             look = false;
+            LookBase();
+        }
+    }
+    public void LookBase()
+    {
+        if (lookBase == true)
+        {
+            lookBase = false;
+            Debug.Log("Baseye Bakýldý");
+            transform.LookAt(BaseComponent.Instance.transform, new Vector3(transform.rotation.x, transform.rotation.y, 0));
         }
     }
 }
