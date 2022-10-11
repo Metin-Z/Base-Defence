@@ -17,7 +17,7 @@ public class EnemyComponent : MonoBehaviour
     void Start()
     {
         look = true;
-        randomSpeed = Random.Range(3.5f, 5);
+        randomSpeed = Random.Range(2.5f, 3.5f);
         shootRangeZ = Random.Range(0.3f, 6f);
         shootRangeX = Random.Range(-4, 10);
         target = new Vector3(shootRangeX,0,shootRangeZ);

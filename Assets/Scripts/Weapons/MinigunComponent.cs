@@ -33,7 +33,7 @@ public class MinigunComponent : MonoBehaviour
             Obj.GetComponent<CapsuleCollider>().enabled = false;
             Obj.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().materials[0].DOFade(0f, 3);
             Destroy(Obj, 4.5f);
-            Obj.transform.gameObject.GetComponent<Animator>().SetBool("Death", true);
+            Obj.transform.gameObject.GetComponent<Animator>().enabled = false;
             GameObject blood = Instantiate(EnemySpawner.Instance.blood, ShotPos, Quaternion.identity);
             GameObject pistol = collision.transform.gameObject.GetComponent<EnemyComponent>().Pistol;
             pistol.transform.parent = null;

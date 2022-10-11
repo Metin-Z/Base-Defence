@@ -20,6 +20,10 @@ public class SniperComponent : MonoBehaviour
         Ray Point = Camera.main.ScreenPointToRay(targetOrigin);
         int layer = 7;
         //int layer2 = 8;
+        if (Input.GetMouseButtonUp(0))
+        {
+
+        
 
         if (Physics.Raycast(Point, out collision, Mathf.Infinity, 1 << layer))
         {
@@ -34,7 +38,7 @@ public class SniperComponent : MonoBehaviour
             Obj.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().materials[0].DOFade(0.0f, 3);
             EnemySpawner.Instance.Active_Enemies.Remove(Obj);
             Destroy(Obj, 4.5f);
-            Obj.gameObject.GetComponent<Animator>().SetBool("Death", true);
+            Obj.gameObject.GetComponent<Animator>().enabled = false;
             GameObject blood = Instantiate(EnemySpawner.Instance.blood, ShotPos, Quaternion.identity);
             GameObject pistol = collision.transform.gameObject.GetComponent<EnemyComponent>().Pistol;
             pistol.transform.parent = null;
@@ -45,6 +49,7 @@ public class SniperComponent : MonoBehaviour
             pistol.GetComponent<Rigidbody>().AddForce(pistol.transform.forward * 60);
             Destroy(pistol, 4.5f);
             Destroy(blood, 1.75f);
+        }
         }
     }
 }

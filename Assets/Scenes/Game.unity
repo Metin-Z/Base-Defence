@@ -6436,7 +6436,9 @@ MonoBehaviour:
   - {fileID: 3656993207322610381, guid: 268e4f0e281b4aa4683c8d8ff080baf7, type: 3}
   - {fileID: 1558005076080594126, guid: 458cee856ae8ef546b8c0238493d5282, type: 3}
   - {fileID: 6858339023694097668, guid: db5279c607c10d545b29884e9c204b9c, type: 3}
+  Active_Enemies: []
   blood: {fileID: 7864028434360649197, guid: 63296f5a222703e47a57502eb01489c6, type: 3}
+  Spawn: 1
 --- !u!4 &1217459355
 Transform:
   m_ObjectHideFlags: 0
