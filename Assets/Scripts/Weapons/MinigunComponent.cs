@@ -38,6 +38,8 @@ public class MinigunComponent : MonoBehaviour
             GameObject pistol = collision.transform.gameObject.GetComponent<EnemyComponent>().Pistol;
             pistol.transform.parent = null;
             pistol.GetComponent<Rigidbody>().isKinematic = false;
+            pistol.GetComponent<Animation>().enabled = false;
+            Destroy(pistol.GetComponent<PistolComponent>());
             pistol.GetComponent<Rigidbody>().AddForce(transform.up * 15);
             Destroy(pistol, 4.5f);
             Destroy(blood, 1.75f);

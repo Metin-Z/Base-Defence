@@ -49,6 +49,8 @@ public class EnemyComponent : MonoBehaviour
     {
         if (lookBase == true)
         {
+            Pistol.GetComponent<Animation>().enabled = true;
+            Pistol.GetComponent<PistolComponent>().enabled = true;
             lookBase = false;
             Debug.Log("Baseye Bakýldý");
             transform.LookAt(BaseComponent.Instance.transform, new Vector3(transform.rotation.x, transform.rotation.y, 0));
