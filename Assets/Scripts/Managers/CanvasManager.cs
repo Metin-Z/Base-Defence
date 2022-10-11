@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -110,14 +111,26 @@ public class CanvasManager : MonoBehaviour
         {
             miniUse = 0;
         }
+
         if (HealthScript.Instance.health_Value == 0)
         {
             CanvasManager.Instance.Explos();
+            for (int i = 0; i < EnemySpawner.Instance.Active_Enemies.Count; i++)
+            {
+                EnemySpawner.Instance.Spawn = false;
+                EnemySpawner.Instance.Active_Enemies[i].GetComponent<Animator>().SetBool("Win", true);
+                Destroy(EnemySpawner.Instance.Active_Enemies[i].GetComponent<EnemyComponent>());
+                Destroy(EnemySpawner.Instance.Active_Enemies[i].GetComponent<NavMeshAgent>());
+            }          
+            
         }
+
+
     }
     public void Explos()
     {
         Debug.Log("Patla");
         Instantiate(Explosion);
     }
+
 }

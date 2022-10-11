@@ -32,6 +32,7 @@ public class SniperComponent : MonoBehaviour
             Obj.GetComponent<NavMeshAgent>().enabled = false;
             Obj.GetComponent<CapsuleCollider>().enabled = false;
             Obj.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().materials[0].DOFade(0.0f, 3);
+            EnemySpawner.Instance.Active_Enemies.Remove(Obj);
             Destroy(Obj, 4.5f);
             Obj.gameObject.GetComponent<Animator>().SetBool("Death", true);
             GameObject blood = Instantiate(EnemySpawner.Instance.blood, ShotPos, Quaternion.identity);

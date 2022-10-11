@@ -12,7 +12,7 @@ public class EnemyComponent : MonoBehaviour
     public Vector3 target;
     public Animator anim;
     bool look;
-    bool targetOn = true;
+    public bool targetOn = true;
     bool lookBase = true;
     void Start()
     {
