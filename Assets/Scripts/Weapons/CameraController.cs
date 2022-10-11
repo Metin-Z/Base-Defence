@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
@@ -38,6 +39,13 @@ public class CameraController : MonoBehaviour
 
             transform.eulerAngles = new Vector3(yaw, pitch, 0.0f);
         }
-        
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            HealthScript.Instance.health_Value -= 50;
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }

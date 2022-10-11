@@ -13,7 +13,7 @@ public class PistolComponent : MonoBehaviour
     public IEnumerator Fire()
     {
         yield return new WaitForSeconds(0.4f);
-        Debug.Log("Ateþ Edildi");
+        HealthScript.Instance.health_Value -= 5;
         Instantiate(Bullet, Barrel.transform.position, Quaternion.identity);
         StartCoroutine(Fire());
     }

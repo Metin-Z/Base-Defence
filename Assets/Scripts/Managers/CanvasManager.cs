@@ -10,7 +10,7 @@ public class CanvasManager : MonoBehaviour
     public static CanvasManager Instance;
     public GameObject MainCamera;
     public GameObject ButtonGroup;
-    
+
     public Vector3 MinigunCamera;
 
     public GameObject SniperCross;
@@ -18,8 +18,10 @@ public class CanvasManager : MonoBehaviour
 
     public GameObject Minigun_BTN;
 
+    public GameObject Explosion;
     public int miniUse;
     int miniTime;
+    bool Exp = false;
     public TextMeshProUGUI minigunSecond_TXT;
     public TextMeshProUGUI miniUse_TXT;
     public GameObject Timer_TXT;
@@ -73,7 +75,7 @@ public class CanvasManager : MonoBehaviour
             yield return new WaitForSeconds(1);
             miniTime--;
         }
-        if (miniTime==0)
+        if (miniTime == 0)
         {
             MinigunDeactive();
         }
@@ -96,7 +98,7 @@ public class CanvasManager : MonoBehaviour
     {
         minigunSecond_TXT.text = miniTime.ToString();
         miniUse_TXT.text = miniUse.ToString();
-        if (miniUse ==0)
+        if (miniUse == 0)
         {
             Minigun_BTN.GetComponent<Button>().interactable = true;
         }
@@ -108,5 +110,14 @@ public class CanvasManager : MonoBehaviour
         {
             miniUse = 0;
         }
+        if (HealthScript.Instance.health_Value == 0)
+        {
+            CanvasManager.Instance.Explos();
+        }
+    }
+    public void Explos()
+    {
+        Debug.Log("Patla");
+        Instantiate(Explosion);
     }
 }
