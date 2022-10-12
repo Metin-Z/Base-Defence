@@ -50,7 +50,7 @@ public class SniperComponent : MonoBehaviour
                         item.angularVelocity = Vector3.zero;
                     }
 
-                    GameObject blood = Instantiate(EnemySpawner.Instance.blood, ShotPos, Quaternion.identity);
+                    GameObject blood = Instantiate(EnemySpawner.Instance.blood, collision.point, Quaternion.identity);
                     GameObject pistol = collision.transform.gameObject.GetComponent<EnemyComponent>().Pistol;
                     pistol.transform.parent = null;
                     pistol.GetComponent<Rigidbody>().isKinematic = false;

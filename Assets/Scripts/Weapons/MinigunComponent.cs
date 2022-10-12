@@ -45,7 +45,7 @@ public class MinigunComponent : MonoBehaviour
                     item.velocity = Vector3.zero;
                     item.angularVelocity = Vector3.zero;
                 }
-                GameObject blood = Instantiate(EnemySpawner.Instance.blood, ShotPos, Quaternion.identity);
+                GameObject blood = Instantiate(EnemySpawner.Instance.blood, collision.point, Quaternion.identity);
                 GameObject pistol = collision.transform.gameObject.GetComponent<EnemyComponent>().Pistol;
                 pistol.transform.parent = null;
                 pistol.GetComponent<Rigidbody>().isKinematic = false;
