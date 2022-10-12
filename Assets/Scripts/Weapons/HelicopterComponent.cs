@@ -19,18 +19,26 @@ public class HelicopterComponent : MonoBehaviour
         Vector3 targetPos;
         targetOrigin = new Vector3(Screen.width / 2, Screen.height / 2, 0);
         Ray Point = Camera.main.ScreenPointToRay(targetOrigin);
-        
+
 
         if (Physics.Raycast(Point, out collision, Mathf.Infinity))
         {
+            if (CanvasManager.Instance.rocket_Count == 0)
+            {
+                CanvasManager.Instance.RocketDeactive();
+            }
             Debug.Log("Ray Attý");
             mCamera.GetComponent<Camera>().DOFieldOfView(60, 0.3f);
             targetPos = collision.point;
             if (Input.GetMouseButtonUp(0))
             {
-                Debug.Log("Roket Oluþturuldu");
-                GameObject rocketObj = Instantiate(RocketPrefab, transform.position, Quaternion.identity);
-                rocketObj.GetComponent<RocketComponent>().CollisionPos = targetPos;
+                if (CanvasManager.Instance.rocket_Count != 0)
+                {
+                    CanvasManager.Instance.rocket_Count--;
+                    Debug.Log("Roket Oluþturuldu");
+                    GameObject rocketObj = Instantiate(RocketPrefab, transform.position, Quaternion.identity);
+                    rocketObj.GetComponent<RocketComponent>().CollisionPos = targetPos;
+                }
             }
         }
     }

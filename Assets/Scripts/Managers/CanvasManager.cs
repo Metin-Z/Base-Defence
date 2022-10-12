@@ -19,15 +19,21 @@ public class CanvasManager : MonoBehaviour
     public GameObject RocketCross;
 
     public GameObject Minigun_BTN;
+    public GameObject Rocket_BTN;
 
     public GameObject Explosion;
     public int miniUse;
     int miniTime;
+    public int rocket_Count;
     bool Exp = false;
     int explosive;
     public TextMeshProUGUI minigunSecond_TXT;
-    public TextMeshProUGUI miniUse_TXT;
+    public TextMeshProUGUI miniUse_TXT;  
     public GameObject Timer_TXT;
+
+    public TextMeshProUGUI rocketUse_TXT;
+    public GameObject RocketBoost_Value;
+    public TextMeshProUGUI RocketBoost_TXT;
     private void Awake()
     {
         Instance = this;
@@ -73,6 +79,8 @@ public class CanvasManager : MonoBehaviour
     }
     public void RocketActive()
     {
+        RocketBoost_Value.SetActive(true);
+        rocket_Count = 3;
         miniTime = 10;
         miniUse = 7;
         Quaternion target = Quaternion.Euler(0, 70, 0);
@@ -116,6 +124,7 @@ public class CanvasManager : MonoBehaviour
     }
     public void RocketDeactive()
     {
+        RocketBoost_Value.SetActive(false);
         MainCamera.GetComponent<HelicopterComponent>().enabled = false;
         MainCamera.GetComponent<Camera>().DOFieldOfView(27, 0.5f);
         CanvasManager.Instance.MainCamera.transform.position = CameraController.Instance.spawnPos;
@@ -131,18 +140,22 @@ public class CanvasManager : MonoBehaviour
     {
         minigunSecond_TXT.text = miniTime.ToString();
         miniUse_TXT.text = miniUse.ToString();
+        rocketUse_TXT.text = miniUse.ToString();
+        RocketBoost_TXT.text = rocket_Count.ToString();
         if (miniUse == 0)
         {
             Minigun_BTN.GetComponent<Button>().interactable = true;
+            Rocket_BTN.GetComponent<Button>().interactable = true;
         }
         else
         {
             Minigun_BTN.GetComponent<Button>().interactable = false;
+            Rocket_BTN.GetComponent<Button>().interactable = false;
         }
         if (miniUse < 0)
         {
             miniUse = 0;
-        }
+        }       
         if (HealthScript.Instance.health_Value <= 0)
         {
             ButtonGroup.SetActive(false);
