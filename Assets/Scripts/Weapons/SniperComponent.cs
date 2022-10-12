@@ -22,9 +22,6 @@ public class SniperComponent : MonoBehaviour
         //int layer2 = 8;
         if (Input.GetMouseButtonUp(0))
         {
-
-
-
             if (Physics.Raycast(Point, out collision, Mathf.Infinity, 1 << layer))
             {
                 if (collision.transform.gameObject.CompareTag("Enemy"))

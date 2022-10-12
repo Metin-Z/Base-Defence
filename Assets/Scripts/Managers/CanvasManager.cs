@@ -16,6 +16,7 @@ public class CanvasManager : MonoBehaviour
 
     public GameObject SniperCross;
     public GameObject MinigunCross;
+    public GameObject RocketCross;
 
     public GameObject Minigun_BTN;
 
@@ -70,6 +71,23 @@ public class CanvasManager : MonoBehaviour
         Timer_TXT.SetActive(true);
         StartCoroutine(MiniTimer());
     }
+    public void RocketActive()
+    {
+        miniTime = 10;
+        miniUse = 7;
+        Quaternion target = Quaternion.Euler(0, 70, 0);
+        MainCamera.GetComponent<HelicopterComponent>().enabled = true;
+ 
+        CameraController.Instance.pitchR = 60;
+        CameraController.Instance.pitchL = -80;
+        CameraController.Instance.yawL = 30;
+        CameraController.Instance.yawR = 80;
+        MainCamera.GetComponent<Camera>().DOFieldOfView(65, 0.5f);
+        ButtonGroup.SetActive(false);
+        RocketCross.SetActive(true);
+        CameraController.Instance.speedH = 1f;
+        CameraController.Instance.speedV = 1f;         
+    }
     public IEnumerator MiniTimer()
     {
         while (miniTime > 0)
@@ -96,6 +114,19 @@ public class CanvasManager : MonoBehaviour
         CameraController.Instance.speedH = 2f;
         CameraController.Instance.speedV = 2f;
     }
+    public void RocketDeactive()
+    {
+        MainCamera.GetComponent<HelicopterComponent>().enabled = false;
+        MainCamera.GetComponent<Camera>().DOFieldOfView(27, 0.5f);
+        CanvasManager.Instance.MainCamera.transform.position = CameraController.Instance.spawnPos;
+        CameraController.Instance.pitchR = -25;
+        CameraController.Instance.pitchL = -45;
+        CameraController.Instance.yawL = 20;
+        ButtonGroup.SetActive(true);
+        RocketCross.SetActive(false);
+        CameraController.Instance.speedH = 2f;
+        CameraController.Instance.speedV = 2f;
+    }
     public void Update()
     {
         minigunSecond_TXT.text = miniTime.ToString();
@@ -112,7 +143,6 @@ public class CanvasManager : MonoBehaviour
         {
             miniUse = 0;
         }
-
         if (HealthScript.Instance.health_Value <= 0)
         {
             ButtonGroup.SetActive(false);
@@ -132,13 +162,9 @@ public class CanvasManager : MonoBehaviour
                 Explos();
             }
         }
-
-
     }
     public void Explos()
     {
-        Debug.Log("Patla");
         Instantiate(Explosion);
     }
-
 }

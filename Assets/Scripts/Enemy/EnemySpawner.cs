@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
     public List<GameObject> Enemies;
     public List<GameObject> Active_Enemies;
     public GameObject blood;
+    public GameObject Helicopter;
 
     int spawnTime;
     int enemySkin;
