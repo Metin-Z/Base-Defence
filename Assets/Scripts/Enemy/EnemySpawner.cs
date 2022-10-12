@@ -10,8 +10,10 @@ public class EnemySpawner : MonoBehaviour
     public List<GameObject> Active_Enemies;
     public GameObject blood;
     public GameObject Helicopter;
+    public GameObject TANK;
 
     int spawnTime;
+    int randomTankSpawn;
     int enemySkin;
     float spawnX;
     float spawnZ;
@@ -24,6 +26,7 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SpawnEnemy());
+        StartCoroutine(TankSpawn());
     }
     public IEnumerator SpawnEnemy()
     {
@@ -38,6 +41,15 @@ public class EnemySpawner : MonoBehaviour
             Active_Enemies.Add(NewEnemy);
             StartCoroutine(SpawnEnemy());
         }
-       
+    }
+    public IEnumerator TankSpawn()
+    {
+        yield return new WaitForSeconds(10);
+        randomTankSpawn = Random.Range(0, 10);
+        if (randomTankSpawn == 5)
+        {
+            Instantiate(TANK, new Vector3(14, 0, 7.8f), Quaternion.identity);
+        }
+
     }
 }
