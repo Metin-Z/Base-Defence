@@ -4873,6 +4873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd69fd922b033994faafcd7519297805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletCol: {fileID: 7440908935920596244, guid: e57dce0e511478c429211a2db494baa0, type: 3}
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4885,6 +4886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c00f2312c0db147ac1c688fe045ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletCol: {fileID: 7440908935920596244, guid: e57dce0e511478c429211a2db494baa0, type: 3}
 --- !u!114 &963194232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6722,6 +6724,7 @@ MonoBehaviour:
   Active_Enemies: []
   blood: {fileID: 7864028434360649197, guid: 63296f5a222703e47a57502eb01489c6, type: 3}
   Helicopter: {fileID: 2506969587392094656}
+  TANK: {fileID: 5831229361749986004, guid: fd99633892a4cac4cbf306eca3d4862b, type: 3}
   Spawn: 1
 --- !u!4 &1217459355
 Transform:

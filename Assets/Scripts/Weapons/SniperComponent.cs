@@ -7,7 +7,9 @@ using UnityEngine.AI;
 public class SniperComponent : MonoBehaviour
 {
     RaycastHit collision;
+    RaycastHit tank;
     GameObject mCamera;
+    public GameObject bulletCol;
     private void Awake()
     {
         mCamera = CanvasManager.Instance.MainCamera;
@@ -19,7 +21,7 @@ public class SniperComponent : MonoBehaviour
         targetOrigin = new Vector3(Screen.width / 2, Screen.height / 2, 0);
         Ray Point = Camera.main.ScreenPointToRay(targetOrigin);
         int layer = 7;
-        //int layer2 = 8;
+        int layer2 = 8;
         if (Input.GetMouseButtonUp(0))
         {
             if (Physics.Raycast(Point, out collision, Mathf.Infinity, 1 << layer))
@@ -59,8 +61,16 @@ public class SniperComponent : MonoBehaviour
                     Destroy(blood, 1.75f);
 
                 }
-
-
+            }
+            if (Physics.Raycast(Point, out tank, Mathf.Infinity, 1 << layer2))
+            {
+                if (tank.transform.gameObject.CompareTag("Tank"))
+                {
+                    mCamera.GetComponent<Camera>().DOFieldOfView(20, 0.3f).OnComplete(() =>
+                       mCamera.GetComponent<Camera>().DOFieldOfView(10, 0.2f));
+                    tank.transform.GetComponent<TankComponent>().health -= 2;
+                    Instantiate(bulletCol, tank.point, Quaternion.identity);
+                }
             }
         }
     }
