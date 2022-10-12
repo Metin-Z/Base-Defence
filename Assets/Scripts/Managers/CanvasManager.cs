@@ -5,12 +5,15 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class CanvasManager : MonoBehaviour
 {
     public static CanvasManager Instance;
     public GameObject MainCamera;
     public GameObject ButtonGroup;
+    public GameObject Slider;
+    public GameObject FailPanel;
 
     public Vector3 MinigunCamera;
 
@@ -160,6 +163,9 @@ public class CanvasManager : MonoBehaviour
         {
             ButtonGroup.SetActive(false);
             HealthScript.Instance.health_Value--;
+            FailPanel.SetActive(true);
+            Slider.SetActive(false);
+
             explosive++;
             for (int i = 0; i < EnemySpawner.Instance.Active_Enemies.Count; i++)
             {
@@ -179,5 +185,9 @@ public class CanvasManager : MonoBehaviour
     public void Explos()
     {
         Instantiate(Explosion);
+    }
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
     }
 }

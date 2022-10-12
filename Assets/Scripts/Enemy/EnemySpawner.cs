@@ -44,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
     }
     public IEnumerator TankSpawn()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(5);
         randomTankSpawn = Random.Range(0, 10);
         if (randomTankSpawn == 5)
         {
