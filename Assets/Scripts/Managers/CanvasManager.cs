@@ -64,11 +64,11 @@ public class CanvasManager : MonoBehaviour
     }
     public void MinigunActive()
     {
-        miniTime = 10;
+        miniTime = 13;
         miniUse = 7;
         Quaternion target = Quaternion.Euler(0, 70, 0);
         MainCamera.GetComponent<MinigunComponent>().enabled = true;
-        CanvasManager.Instance.MainCamera.transform.position = new Vector3(-6.8f, 3.5f, 0.5f);
+        CanvasManager.Instance.MainCamera.transform.DOLocalMove(new Vector3(-6.8f, 3.5f, 0.5f), 3);
         CameraController.Instance.pitchR = 110;
         CameraController.Instance.pitchL = 20;
         CameraController.Instance.yawL = -15;
@@ -115,7 +115,7 @@ public class CanvasManager : MonoBehaviour
     {
         MainCamera.GetComponent<MinigunComponent>().enabled = false;
         MainCamera.GetComponent<Camera>().DOFieldOfView(27, 0.5f);
-        CanvasManager.Instance.MainCamera.transform.position = CameraController.Instance.spawnPos;
+        CanvasManager.Instance.MainCamera.transform.DOLocalMove(new Vector3(32,23,-32),3);
         CameraController.Instance.pitchR = -25;
         CameraController.Instance.pitchL = -45;
         CameraController.Instance.yawL = 20;
@@ -127,10 +127,11 @@ public class CanvasManager : MonoBehaviour
     }
     public void RocketDeactive()
     {
+        CanvasManager.Instance.MainCamera.transform.SetParent(null);
         RocketBoost_Value.SetActive(false);
         MainCamera.GetComponent<HelicopterComponent>().enabled = false;
         MainCamera.GetComponent<Camera>().DOFieldOfView(27, 0.5f);
-        CanvasManager.Instance.MainCamera.transform.position = CameraController.Instance.spawnPos;
+        CanvasManager.Instance.MainCamera.transform.DOLocalMove(new Vector3(32, 23, -32), 2f);
         CameraController.Instance.pitchR = -25;
         CameraController.Instance.pitchL = -45;
         CameraController.Instance.yawL = 20;

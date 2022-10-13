@@ -11,9 +11,15 @@ public class MinigunComponent : MonoBehaviour
     GameObject mCamera;
 
     public GameObject bulletCol;
+    public static bool miniShoot;
     private void Awake()
     {
         mCamera = CanvasManager.Instance.MainCamera;
+    }
+    private void Start()
+    {
+        miniShoot = false;
+        StartCoroutine(ShootTrue());
     }
     void Update()
     {
@@ -23,51 +29,60 @@ public class MinigunComponent : MonoBehaviour
         Ray Point = Camera.main.ScreenPointToRay(targetOrigin);
         int layer = 7;
         int layer2 = 8;
-
-        if (Physics.Raycast(Point, out collision, Mathf.Infinity, 1 << layer))
+        if (miniShoot == true)
         {
-            if (collision.transform.gameObject.CompareTag("Enemy"))
+
+
+            if (Physics.Raycast(Point, out collision, Mathf.Infinity, 1 << layer))
             {
-                ShotPos = new Vector3(collision.transform.position.x, collision.transform.position.y + 1.55f, collision.transform.position.z);
-                Sequence Shake = DOTween.Sequence();
-                Shake.Append(mCamera.GetComponent<Camera>().DOFieldOfView(80, 0.3f).OnComplete(() =>
-                mCamera.GetComponent<Camera>().DOFieldOfView(65, 0.2f)));
-                GameObject Obj = collision.transform.gameObject;
-                Obj.GetComponent<EnemyComponent>().enabled = false;
-                Obj.GetComponent<NavMeshAgent>().enabled = false;
-                Obj.GetComponent<CapsuleCollider>().enabled = false;
-                Obj.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().materials[0].DOFade(0f, 3);
-                Destroy(Obj, 4.5f);
-                Obj.transform.gameObject.GetComponent<Animator>().enabled = false;
-                foreach (Rigidbody item in Obj.GetComponentsInChildren<Rigidbody>())
+                if (collision.transform.gameObject.CompareTag("Enemy"))
                 {
-                    item.isKinematic = false;
-                    item.velocity = Vector3.zero;
-                    item.angularVelocity = Vector3.zero;
+                    ShotPos = new Vector3(collision.transform.position.x, collision.transform.position.y + 1.55f, collision.transform.position.z);
+                    Sequence Shake = DOTween.Sequence();
+                    Shake.Append(mCamera.GetComponent<Camera>().DOFieldOfView(80, 0.3f).OnComplete(() =>
+                    mCamera.GetComponent<Camera>().DOFieldOfView(65, 0.2f)));
+                    GameObject Obj = collision.transform.gameObject;
+                    Obj.GetComponent<EnemyComponent>().enabled = false;
+                    Obj.GetComponent<NavMeshAgent>().enabled = false;
+                    Obj.GetComponent<CapsuleCollider>().enabled = false;
+                    Obj.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().materials[0].DOFade(0f, 3);
+                    Destroy(Obj, 4.5f);
+                    Obj.transform.gameObject.GetComponent<Animator>().enabled = false;
+                    foreach (Rigidbody item in Obj.GetComponentsInChildren<Rigidbody>())
+                    {
+                        item.isKinematic = false;
+                        item.velocity = Vector3.zero;
+                        item.angularVelocity = Vector3.zero;
+                    }
+                    GameObject blood = Instantiate(EnemySpawner.Instance.blood, collision.point, Quaternion.identity);
+                    GameObject pistol = collision.transform.gameObject.GetComponent<EnemyComponent>().Pistol;
+                    pistol.transform.parent = null;
+                    pistol.GetComponent<Rigidbody>().isKinematic = false;
+                    pistol.GetComponent<Animation>().enabled = false;
+                    Destroy(pistol.GetComponent<PistolComponent>());
+                    pistol.GetComponent<Rigidbody>().AddForce(transform.up * 15);
+                    Destroy(pistol, 4.5f);
+                    Destroy(blood, 1.75f);
+
                 }
-                GameObject blood = Instantiate(EnemySpawner.Instance.blood, collision.point, Quaternion.identity);
-                GameObject pistol = collision.transform.gameObject.GetComponent<EnemyComponent>().Pistol;
-                pistol.transform.parent = null;
-                pistol.GetComponent<Rigidbody>().isKinematic = false;
-                pistol.GetComponent<Animation>().enabled = false;
-                Destroy(pistol.GetComponent<PistolComponent>());
-                pistol.GetComponent<Rigidbody>().AddForce(transform.up * 15);
-                Destroy(pistol, 4.5f);
-                Destroy(blood, 1.75f);
-
             }
-        }
-        if (Physics.Raycast(Point, out tank, Mathf.Infinity, 1 << layer2))
-        {
-            if (tank.transform.gameObject.CompareTag("Tank"))
+            if (Physics.Raycast(Point, out tank, Mathf.Infinity, 1 << layer2))
             {
-                Sequence Shake = DOTween.Sequence();
-                Shake.Append(mCamera.GetComponent<Camera>().DOFieldOfView(80, 0.3f).OnComplete(() =>
-                mCamera.GetComponent<Camera>().DOFieldOfView(65, 0.2f)));
-                tank.transform.GetComponent<TankComponent>().health -= 2;
-                Instantiate(bulletCol,tank.point,Quaternion.identity);
-            }
+                if (tank.transform.gameObject.CompareTag("Tank"))
+                {
+                    Sequence Shake = DOTween.Sequence();
+                    Shake.Append(mCamera.GetComponent<Camera>().DOFieldOfView(80, 0.3f).OnComplete(() =>
+                    mCamera.GetComponent<Camera>().DOFieldOfView(65, 0.2f)));
+                    tank.transform.GetComponent<TankComponent>().health -= 2;
+                    Instantiate(bulletCol, tank.point, Quaternion.identity);
+                }
 
+            }
         }
+    }
+    public IEnumerator ShootTrue()
+    {
+        yield return new WaitForSeconds(3);
+        miniShoot = true;
     }
 }
