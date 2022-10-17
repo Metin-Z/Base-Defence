@@ -166,11 +166,10 @@ public class CanvasManager : MonoBehaviour
             HealthScript.Instance.health_Value--;
             FailPanel.SetActive(true);
             Slider.SetActive(false);
-
             explosive++;
+            EnemySpawner.Instance.Spawn = false;
             for (int i = 0; i < EnemySpawner.Instance.Active_Enemies.Count; i++)
             {
-                EnemySpawner.Instance.Spawn = false;
                 EnemySpawner.Instance.Active_Enemies[i].GetComponent<Animator>().SetBool("Win", true);
                 Destroy(EnemySpawner.Instance.Active_Enemies[i].GetComponent<EnemyComponent>());
                 Destroy(EnemySpawner.Instance.Active_Enemies[i].GetComponent<NavMeshAgent>());

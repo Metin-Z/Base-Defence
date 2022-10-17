@@ -47,6 +47,7 @@ public class MinigunComponent : MonoBehaviour
                     Obj.GetComponent<CapsuleCollider>().enabled = false;
                     Obj.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().materials[0].DOFade(0f, 3);
                     Destroy(Obj, 4.5f);
+                    EnemySpawner.Instance.Active_Enemies.Remove(Obj);
                     Obj.transform.gameObject.GetComponent<Animator>().enabled = false;
                     foreach (Rigidbody item in Obj.GetComponentsInChildren<Rigidbody>())
                     {
@@ -63,7 +64,6 @@ public class MinigunComponent : MonoBehaviour
                     pistol.GetComponent<Rigidbody>().AddForce(transform.up * 15);
                     Destroy(pistol, 4.5f);
                     Destroy(blood, 1.75f);
-
                 }
             }
             if (Physics.Raycast(Point, out tank, Mathf.Infinity, 1 << layer2))

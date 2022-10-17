@@ -59,7 +59,6 @@ public class SniperComponent : MonoBehaviour
                     pistol.GetComponent<Rigidbody>().AddForce(pistol.transform.up * 120 + pistol.transform.forward * 60);
                     Destroy(pistol, 4.5f);
                     Destroy(blood, 1.75f);
-
                 }
             }
             if (Physics.Raycast(Point, out tank, Mathf.Infinity, 1 << layer2))

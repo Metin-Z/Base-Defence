@@ -21,7 +21,7 @@ public class HelicopterComponent : MonoBehaviour
     void Update()
     {
         transform.SetParent(EnemySpawner.Instance.Helicopter.transform.GetChild(0));
-        transform.DOLocalMove(new Vector3(0,0,0),3);
+        transform.DOLocalMove(new Vector3(0,0,0),1.5f);
         Vector3 targetOrigin;
         Vector3 targetPos;
         targetOrigin = new Vector3(Screen.width / 2, Screen.height / 2, 0);
@@ -53,7 +53,7 @@ public class HelicopterComponent : MonoBehaviour
     }
     public IEnumerator RocketTrue()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1.5f);
         rocketShoot = true;
     }
 }

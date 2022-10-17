@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HealthScript : MonoBehaviour
 {
     Slider healthBar;
-    public int health_MaxValue =250;
+    public int health_MaxValue =550;
     public int health_Value;
     public static HealthScript Instance;
     private void Awake()

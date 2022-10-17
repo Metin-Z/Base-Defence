@@ -20,8 +20,8 @@ public class EnemyComponent : MonoBehaviour
         randomSpeed = Random.Range(2.5f, 3.5f);
         shootRangeZ = Random.Range(0.3f, 6f);
         shootRangeX = Random.Range(-4, 10);
-        target = new Vector3(shootRangeX,0,shootRangeZ);
-        
+        target = new Vector3(shootRangeX, 0, shootRangeZ);
+
         if (look == true)
         {
             transform.LookAt(target, new Vector3(transform.rotation.x, transform.rotation.y, 0));
@@ -35,12 +35,12 @@ public class EnemyComponent : MonoBehaviour
         if (targetOn == true)
         {
             nMesh.destination = target;
-        }    
-        if (Mathf.Abs( target.x-transform.position.x) < 0.55f && Mathf.Abs(target.z - transform.position.z) < 0.55f)
+        }
+        if (Mathf.Abs(target.x - transform.position.x) < 0.55f && Mathf.Abs(target.z - transform.position.z) < 0.55f)
         {
             targetOn = false;
             nMesh.enabled = false;
-            anim.SetBool("Stop", true);           
+            anim.SetBool("Stop", true);
             look = false;
             LookBase();
         }
@@ -49,10 +49,12 @@ public class EnemyComponent : MonoBehaviour
     {
         if (lookBase == true)
         {
-            Pistol.GetComponent<Animation>().enabled = true;
-            Pistol.GetComponent<PistolComponent>().enabled = true;
-            lookBase = false;
-            transform.LookAt(BaseComponent.Instance.transform, new Vector3(transform.rotation.x, transform.rotation.y, 0));
+            if (Pistol == null)
+                return;
+                Pistol.GetComponent<Animation>().enabled = true;
+                Pistol.GetComponent<PistolComponent>().enabled = true;
+                lookBase = false;
+                transform.LookAt(BaseComponent.Instance.transform, new Vector3(transform.rotation.x, transform.rotation.y, 0));           
         }
     }
 }
