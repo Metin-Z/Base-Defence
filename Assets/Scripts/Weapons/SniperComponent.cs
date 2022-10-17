@@ -37,7 +37,7 @@ public class SniperComponent : MonoBehaviour
                         Obj.GetComponent<EnemyComponent>().enabled = false;
                     if (Obj.GetComponent<NavMeshAgent>())
                         Obj.GetComponent<NavMeshAgent>().enabled = false;
-                    Obj.GetComponent<CapsuleCollider>().enabled = false;
+                    //Obj.GetComponent<CapsuleCollider>().enabled = false;
                     Obj.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().materials[0].DOFade(0.0f, 3);
                     EnemySpawner.Instance.Active_Enemies.Remove(Obj);
                     Destroy(Obj, 4.5f);
@@ -49,7 +49,6 @@ public class SniperComponent : MonoBehaviour
                         item.velocity = Vector3.zero;
                         item.angularVelocity = Vector3.zero;
                     }
-
                     GameObject blood = Instantiate(EnemySpawner.Instance.blood, collision.point, Quaternion.identity);
                     GameObject pistol = collision.transform.gameObject.GetComponent<EnemyComponent>().Pistol;
                     pistol.transform.parent = null;

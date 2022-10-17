@@ -11,7 +11,7 @@ public class EnemyComponent : MonoBehaviour
     public GameObject Pistol;
     public Vector3 target;
     public Animator anim;
-    bool look;
+    public bool look;
     public bool targetOn = true;
     bool lookBase = true;
     void Start()
@@ -43,6 +43,7 @@ public class EnemyComponent : MonoBehaviour
             anim.SetBool("Stop", true);
             look = false;
             LookBase();
+
         }
     }
     public void LookBase()
@@ -51,10 +52,10 @@ public class EnemyComponent : MonoBehaviour
         {
             if (Pistol == null)
                 return;
-                Pistol.GetComponent<Animation>().enabled = true;
-                Pistol.GetComponent<PistolComponent>().enabled = true;
-                lookBase = false;
-                transform.LookAt(BaseComponent.Instance.transform, new Vector3(transform.rotation.x, transform.rotation.y, 0));           
+            Pistol.GetComponent<Animation>().enabled = true;
+            Pistol.GetComponent<PistolComponent>().enabled = true;
+            lookBase = false;
+            transform.LookAt(BaseComponent.Instance.transform, new Vector3(transform.rotation.x, transform.rotation.y, 0));         
         }
     }
 }
