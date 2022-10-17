@@ -31,8 +31,6 @@ public class MinigunComponent : MonoBehaviour
         int layer2 = 8;
         if (miniShoot == true)
         {
-
-
             if (Physics.Raycast(Point, out collision, Mathf.Infinity, 1 << layer))
             {
                 if (collision.transform.gameObject.CompareTag("Enemy"))
@@ -76,7 +74,6 @@ public class MinigunComponent : MonoBehaviour
                     tank.transform.GetComponent<TankComponent>().health -= 2;
                     Instantiate(bulletCol, tank.point, Quaternion.identity);
                 }
-
             }
         }
     }

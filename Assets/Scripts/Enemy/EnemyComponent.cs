@@ -43,7 +43,6 @@ public class EnemyComponent : MonoBehaviour
             anim.SetBool("Stop", true);
             look = false;
             LookBase();
-
         }
     }
     public void LookBase()
